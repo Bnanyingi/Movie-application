@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import "./movie.css";
 import Search from "./search";
+import Notification from "./notification";
 
 export default function Movie() {
   const queryClient = useQueryClient();
@@ -19,8 +20,10 @@ export default function Movie() {
   });
 
   const handleSearch = (query) => {
-    const filteredMovies = movies.filter((movie) =>
-      movie.title && movie.title.toLowerCase().includes(query.toLowerCase())
+    const filteredMovies = movies.filter(
+      (movie) =>
+        movie.title &&
+        movie.title.toLowerCase().includes(query.toLowerCase())
     );
     setSearchResults(filteredMovies);
   };
@@ -40,11 +43,12 @@ export default function Movie() {
   }
 
   return (
-    <div>
+    <div className="main-page">
+      <Notification />
       <Search handleSearch={handleSearch} />
-      <ul className="movie-list">
 
-         {(searchResults.length > 0 ? searchResults : movies).map((movie) => (
+      <ul className="movie-list">
+        {(searchResults.length > 0 ? searchResults : movies).map((movie) => (
           <li key={movie.id} className="movie-item">
             <img
               src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}

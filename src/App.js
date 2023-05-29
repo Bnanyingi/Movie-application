@@ -8,8 +8,6 @@ function App() {
     <div className="App">
       <h1>My movie App </h1>
       <Movie />
-      <Search />
-
     </div>
   );
 }
